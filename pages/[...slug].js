@@ -4,6 +4,7 @@ import Storyblok, {useStoryblok} from '../lib/storyblok'
 import DynamicComponent from '../components/dynamic-component'
 import Logo from '../components/layout/logo'
 import Navigation from "../components/layout/navigation";
+import SeoMetaTags from "../../../private/madamechau.ch/components/layout/seo-meta-tags";
 
 export default function Page({story, links, preview}) {
     //const enableBridge = true // load the storyblok bridge everywhere
@@ -11,10 +12,7 @@ export default function Page({story, links, preview}) {
 
     return (
         <>
-            <Head>
-                <title>{ story?.content?.seo?.title ?? 'Your title'} - Your Brand</title>
-                <meta name="description" content={story?.content?.seo?.description ?? ''}/>
-            </Head>
+            <SeoMetaTags story={story} />
 
             <header className="container w-full mx-auto py-4 px-4">
                 <div className="flex justify-center">
