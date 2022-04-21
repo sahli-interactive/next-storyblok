@@ -1,10 +1,12 @@
-import { useStoryblokApi, StoryblokComponent } from "@storyblok/react";
+import { useStoryblokApi, StoryblokComponent, useStoryblokState } from "@storyblok/react";
 
 import Logo from '../components/layout/logo'
 import Navigation from "../components/layout/navigation"
 import SeoMetaTags from "../components/layout/seo-meta-tags"
 
 export default function Page({story, links}) {
+    story = useStoryblokState(story);
+
     if (!story?.content) {
         return <div>Lade...</div>;
     }
@@ -34,7 +36,7 @@ export async function getStaticProps({query, params, preview = false}) {
     let slug = params?.slug ? params.slug.join("/") : "home";
     // load the published content outside of the preview mode
     let sbParams = {
-        version: 'draft', // or 'published'
+        version: 'draft', // change to 'published' when going live
         resolve_links: 'url'
     }
 
