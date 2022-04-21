@@ -8,7 +8,7 @@ export default function Page({story, links}) {
     story = useStoryblokState(story);
 
     if (!story?.content) {
-        return <div>Lade...</div>;
+        return <div className="container w-screen h-screen p-4 flex justify-center items-center">Lade...</div>;
     }
 
     return (
@@ -31,6 +31,7 @@ export default function Page({story, links}) {
 }
 
 export async function getStaticProps({query, params, preview = false}) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const storyblokApi = useStoryblokApi()
     // home is the default slug for the homepage in Storyblok
     let slug = params?.slug ? params.slug.join("/") : "home";
@@ -74,6 +75,7 @@ export async function getStaticProps({query, params, preview = false}) {
 }
 
 export async function getStaticPaths() {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const storyblokApi = useStoryblokApi()
     // get all links from Storyblok
     let {data} = await storyblokApi.get("cdn/links/");
