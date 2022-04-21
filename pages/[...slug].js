@@ -1,14 +1,13 @@
-import Head from 'next/head'
+import { useStoryblokApi, StoryblokComponent } from "@storyblok/react";
 
-import Storyblok, {useStoryblok} from '../lib/storyblok'
-import DynamicComponent from '../components/dynamic-component'
 import Logo from '../components/layout/logo'
 import Navigation from "../components/layout/navigation"
-import SeoMetaTags from "../components/layout/seo-meta-tags.js"
+import SeoMetaTags from "../components/layout/seo-meta-tags"
 
-export default function Page({story, links, preview}) {
-    //const enableBridge = true // load the storyblok bridge everywhere
-    story = useStoryblok(story, preview)
+export default function Page({story, links}) {
+    if (!story?.content) {
+        return <div>Lade...</div>;
+    }
 
     return (
         <>
@@ -20,7 +19,7 @@ export default function Page({story, links, preview}) {
                 </div>
                 <Navigation links={links} currentStory={story}/>
             </header>
-            <DynamicComponent blok={story?.content}/>
+            <StoryblokComponent blok={story.content} />
 
             <footer>
                 Your Footer
@@ -30,11 +29,12 @@ export default function Page({story, links, preview}) {
 }
 
 export async function getStaticProps({query, params, preview = false}) {
+    const storyblokApi = useStoryblokApi()
     // home is the default slug for the homepage in Storyblok
     let slug = params?.slug ? params.slug.join("/") : "home";
     // load the published content outside of the preview mode
     let sbParams = {
-        version: 'published', // or 'published'
+        version: 'draft', // or 'published'
         resolve_links: 'url'
     }
 
@@ -43,8 +43,8 @@ export async function getStaticProps({query, params, preview = false}) {
         sbParams.version = 'draft'
         sbParams.cv = Date.now()
     }
-    let storyQuery = Storyblok.get(`cdn/stories/${slug}`, sbParams)
-    let linksQuery = Storyblok.get("cdn/links/")
+    let storyQuery = storyblokApi.get(`cdn/stories/${slug}`, sbParams)
+    let linksQuery = storyblokApi.get("cdn/links/")
 
     const responses = await Promise.all([storyQuery, linksQuery])
     let links = []
@@ -72,8 +72,9 @@ export async function getStaticProps({query, params, preview = false}) {
 }
 
 export async function getStaticPaths() {
+    const storyblokApi = useStoryblokApi()
     // get all links from Storyblok
-    let {data} = await Storyblok.get("cdn/links/");
+    let {data} = await storyblokApi.get("cdn/links/");
 
     let paths = [];
     // create a routes for every link

@@ -22,17 +22,10 @@ $  yarn # or npm install
 ```
 
 ### 3. Adding the Access token
-Create a new empty Space and exchange the preview token with your own in ```lib/storyblok.js```.
+Create a new empty Space, add the preview token to ```.env.local```.
 
-```js
-// in lib/storyblok.js
-const Storyblok = new StoryblokClient({
-    accessToken: 'your-preview-token',
-    cache: {
-        clear: 'auto',
-        type: 'memory'
-    }
-})
+```
+STORYBLOK_TOKEN=<your-new-token>
 ```
 
 ### 4. Run your project

@@ -10,12 +10,11 @@
     "create-component": "node ./generators/copy.js"
   },
   "dependencies": {
-    "@storyblok/storyblok-editable": "^1.0.0",
+    "@storyblok/react": "^1.0.5",
     "axios": "^0.21.1",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "storyblok-js-client": "^4.1.5",
     "storyblok-rich-text-react-renderer": "^2.5.2"
   },
   "devDependencies": {

@@ -1,11 +1,11 @@
 import React from 'react'
-import {sbEditable} from '@storyblok/storyblok-editable'
+import { storyblokEditable } from "@storyblok/react";
 import Image from 'next/image'
 
 const Teaser = ({blok}) => {
   return (
     <div
-      {...sbEditable(blok)}
+      {...storyblokEditable(blok)}
       className="container mx-auto px-4">
       <div className="flex justify-between py-16 sm:py-10">
         <div className="w-full lg:w-1/2 xl:w-6/12 text-center lg:text-left py-4 sm:p-0">
