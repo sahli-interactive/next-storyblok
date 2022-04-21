@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Storyblok, {useStoryblok} from '../lib/storyblok'
 import DynamicComponent from '../components/dynamic-component'
 import Logo from '../components/layout/logo'
-import Navigation from "../components/layout/navigation";
-import SeoMetaTags from "../../../private/madamechau.ch/components/layout/seo-meta-tags";
+import Navigation from "../components/layout/navigation"
+import SeoMetaTags from "../components/layout/seo-meta-tags.js"
 
 export default function Page({story, links, preview}) {
     //const enableBridge = true // load the storyblok bridge everywhere
