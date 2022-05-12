@@ -1,4 +1,4 @@
-import { useStoryblokApi, StoryblokComponent, useStoryblokState } from "@storyblok/react";
+import {StoryblokComponent, useStoryblokState, getStoryblokApi} from "@storyblok/react";
 
 import Logo from '../components/layout/logo'
 import Navigation from "../components/layout/navigation"
@@ -31,8 +31,7 @@ export default function Page({story, links}) {
 }
 
 export async function getStaticProps({query, params, preview = false}) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const storyblokApi = useStoryblokApi()
+    const storyblokApi = getStoryblokApi()
     // home is the default slug for the homepage in Storyblok
     let slug = params?.slug ? params.slug.join("/") : "home";
     // load the published content outside of the preview mode
@@ -75,8 +74,7 @@ export async function getStaticProps({query, params, preview = false}) {
 }
 
 export async function getStaticPaths() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const storyblokApi = useStoryblokApi()
+    const storyblokApi = getStoryblokApi()
     // get all links from Storyblok
     let {data} = await storyblokApi.get("cdn/links/");
 
