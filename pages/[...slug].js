@@ -4,8 +4,11 @@ import Logo from '../components/layout/logo'
 import Navigation from "../components/layout/navigation"
 import SeoMetaTags from "../components/layout/seo-meta-tags"
 
-export default function Page({story, links}) {
-    story = useStoryblokState(story);
+export default function Page({story, links, preview}) {
+    if (preview) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        story = useStoryblokState(story);
+    }
 
     if (!story?.content) {
         return <div className="container w-screen h-screen p-4 flex justify-center items-center">Lade...</div>;
@@ -21,6 +24,7 @@ export default function Page({story, links}) {
                 </div>
                 <Navigation links={links} currentStory={story}/>
             </header>
+
             <StoryblokComponent blok={story.content} />
 
             <footer>
@@ -32,15 +36,16 @@ export default function Page({story, links}) {
 
 export async function getStaticProps({query, params, preview = false}) {
     const storyblokApi = getStoryblokApi()
+    preview = process.env.NODE_ENV === 'development' || preview
     // home is the default slug for the homepage in Storyblok
     let slug = params?.slug ? params.slug.join("/") : "home";
     // load the published content outside of the preview mode
     let sbParams = {
-        version: 'draft', // change to 'published' when going live
+        version: 'published',
         resolve_links: 'url'
     }
 
-    if (query?._storyblok || preview) {
+    if (preview) {
         // load the draft version inside of the preview mode
         sbParams.version = 'draft'
         sbParams.cv = Date.now()
