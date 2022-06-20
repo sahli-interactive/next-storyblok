@@ -26,6 +26,7 @@ Create a new empty Space, add the preview token to ```.env.local```.
 
 ```
 STORYBLOK_TOKEN=<your-new-token>
+PREVIEW_TOKEN=<your-token-or-password>
 ```
 
 ### 4. Run your project
@@ -41,7 +42,17 @@ $ yarn dev # or npm run dev
 $ yarn build # or npm run build
 ```
 
+### 5. Setup preview mode
+To enable preview mode you have to add two preview URLs in storyblok:
 
+**Preview**
+`https://<my-netlify-or-prod-url>/api/preview?secret=<your-preview-paswsword-or-token>&slug=`
+
+**Exit Preview**
+`https://<my-netlify-or-prod-url>/api/exit-preview?slug=`
+
+Don't forget to add the preview token as env-variable in netlify as well.
+It might be helpful for the end user to set the preview URL as default.
 
 ## Resources
 
