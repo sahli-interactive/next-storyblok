@@ -17,9 +17,8 @@ export default async function handler(req, res) {
     // initial get requests that is used to retrieve the total amount of pages
     storyblok.get(`cdn/stories/${req.body.story_id}`, options).then(async res => {
         let story = res.data.story;
-        if (story.slug !== 'global') {
+        if (story.slug !== 'global')
             res.revalidate(`/${story.full_slug}`)
-        }
     }).catch(e => {
         console.log(e)
     })
