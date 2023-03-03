@@ -46,3 +46,7 @@ test-timings.json
 
 # Secrets
 .env.local
+
+# Misc
+components.*
+presets.*

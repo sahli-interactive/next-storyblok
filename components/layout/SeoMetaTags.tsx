@@ -1,11 +1,18 @@
-import React from 'react'
+import { FC } from 'react';
 import Head from "next/head";
+import { PageStoryblok } from '../../types/component-types-sb';
+import { ISbStoryData } from '@storyblok/react';
 
-const SeoMetaTags = ({story, robots = 'index, follow'}) => {
+interface SeoMetaTagsProps {
+    story: ISbStoryData<PageStoryblok>
+    robots?: string
+}
+
+export const SeoMetaTags: FC<SeoMetaTagsProps> = ({story, robots = 'index, follow'}) => {
     return (
         <Head>
             <title>{story.content?.seo?.title ?? story.name} · Your Brand</title>
-            <meta name="created" content={story.published_at} />
+            <meta name="created" content={story.published_at || ''} />
             <meta name="robots" content={robots} />
             <meta property="og:type" content="website" />
             <meta name="twitter:title" property="og:title" content={story.content?.seo?.title ?? story.name} />
@@ -17,5 +24,3 @@ const SeoMetaTags = ({story, robots = 'index, follow'}) => {
         </Head>
     )
 }
-
-export default SeoMetaTags
