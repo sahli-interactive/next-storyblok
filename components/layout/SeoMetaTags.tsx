@@ -8,7 +8,7 @@ interface SeoMetaTagsProps {
     robots?: string
 }
 
-export const SeoMetaTags: FC<SeoMetaTagsProps> = ({story, robots = 'index, follow'}) => {
+const SeoMetaTags: FC<SeoMetaTagsProps> = ({story, robots = 'index, follow'}) => {
     return (
         <Head>
             <title>{story.content?.seo?.title ?? story.name} · Your Brand</title>
@@ -24,3 +24,5 @@ export const SeoMetaTags: FC<SeoMetaTagsProps> = ({story, robots = 'index, follo
         </Head>
     )
 }
+
+export default SeoMetaTags

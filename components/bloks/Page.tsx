@@ -6,7 +6,7 @@ interface PageProps {
   blok: PageStoryblok
 }
 
-export const Page: FC<PageProps> = ({ blok }) => (
+const Page: FC<PageProps> = ({ blok }) => (
   <main className="p-6" {...storyblokEditable(blok)}>
     {blok.body ?
       blok.body.map(blok => (
@@ -15,3 +15,5 @@ export const Page: FC<PageProps> = ({ blok }) => (
       null}
   </main>
 )
+
+export default Page

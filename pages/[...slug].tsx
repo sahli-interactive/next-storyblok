@@ -1,8 +1,8 @@
 import { StoryblokComponent, useStoryblokState, getStoryblokApi, ISbStoryParams, ISbStoryData } from "@storyblok/react";
 import { FC } from "react";
 
-import { Logo } from "../components/layout/Logo"
-import { SeoMetaTags } from "../components/layout/SeoMetaTags"
+import Logo from "../components/layout/Logo"
+import SeoMetaTags from "../components/layout/SeoMetaTags"
 import { PageStoryblok } from "../types/component-types-sb";
 
 interface PageProps {

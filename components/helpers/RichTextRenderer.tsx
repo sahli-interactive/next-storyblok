@@ -6,7 +6,7 @@ interface RichTextRendererProps {
   text: any
 }
 
-export const RichTextRenderer: FC<RichTextRendererProps> = ({ text }) => {
+const RichTextRenderer: FC<RichTextRendererProps> = ({ text }) => {
   return (
     <>
       {render(text, {
@@ -17,3 +17,5 @@ export const RichTextRenderer: FC<RichTextRendererProps> = ({ text }) => {
     </>
   )
 }
+
+export default RichTextRenderer

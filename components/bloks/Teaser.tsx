@@ -7,7 +7,7 @@ interface TeaserProps {
   blok: TeaserStoryblok
 }
 
-export const Teaser: FC<TeaserProps> = ({ blok }) => {
+const Teaser: FC<TeaserProps> = ({ blok }) => {
   return (
     <div
       {...storyblokEditable(blok)}
@@ -34,3 +34,5 @@ export const Teaser: FC<TeaserProps> = ({ blok }) => {
     </div>
   )
 }
+
+export default Teaser
