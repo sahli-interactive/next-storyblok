@@ -1,10 +1,17 @@
-import {StoryblokComponent, useStoryblokState, getStoryblokApi} from "@storyblok/react";
+import { StoryblokComponent, useStoryblokState, getStoryblokApi, ISbStoryParams, ISbStoryData } from "@storyblok/react";
+import { FC } from "react";
 
-import Logo from '../components/layout/logo'
-import Navigation from "../components/layout/navigation"
-import SeoMetaTags from "../components/layout/seo-meta-tags"
+import Logo from "../components/layout/Logo"
+import SeoMetaTags from "../components/layout/SeoMetaTags"
+import { PageStoryblok } from "../types/component-types-sb";
 
-export default function Page({story, links, preview}) {
+interface PageProps {
+    story: ISbStoryData<PageStoryblok>
+    links: [{name: string, slug: string}]
+    preview: boolean
+}
+
+const Page: FC<PageProps> = ({ story, preview }) => {
     if (preview) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         story = useStoryblokState(story);
@@ -13,7 +20,7 @@ export default function Page({story, links, preview}) {
     if (!story?.content) {
         return <div className="container w-screen h-screen p-4 flex justify-center items-center">Lade...</div>;
     }
-
+    
     return (
         <>
             <SeoMetaTags story={story} />
@@ -22,7 +29,6 @@ export default function Page({story, links, preview}) {
                 <div className="flex justify-center">
                     <Logo/>
                 </div>
-                <Navigation links={links} currentStory={story}/>
             </header>
 
             <StoryblokComponent blok={story.content} />
@@ -34,15 +40,17 @@ export default function Page({story, links, preview}) {
     )
 }
 
-export async function getStaticProps({query, params, preview = false}) {
+export default Page
+
+export async function getStaticProps({ params, preview = false}: { params: {slug: string[]}, preview: boolean }) {
     const storyblokApi = getStoryblokApi()
     preview = process.env.NODE_ENV === 'development' || preview
     // home is the default slug for the homepage in Storyblok
     let slug = params?.slug ? params.slug.join("/") : "home";
     // load the published content outside of the preview mode
-    let sbParams = {
+    let sbParams: ISbStoryParams = {
         version: 'published',
-        resolve_links: 'url'
+        resolve_links: 'url',
     }
 
     if (preview) {
@@ -50,27 +58,13 @@ export async function getStaticProps({query, params, preview = false}) {
         sbParams.version = 'draft'
         sbParams.cv = Date.now()
     }
-    let storyQuery = storyblokApi.get(`cdn/stories/${slug}`, sbParams)
-    let linksQuery = storyblokApi.get("cdn/links/")
+    const storyQuery = storyblokApi.get(`cdn/stories/${slug}`, sbParams)
 
-    const responses = await Promise.all([storyQuery, linksQuery])
-    let links = []
-
-    Object.keys(responses[1].data.links).forEach((linkKey) => {
-        // do not create a route for folders and home
-        if (responses[1].data.links[linkKey].is_folder || responses[1].data.links[linkKey].slug === "home") {
-            return;
-        }
-
-        links.push(responses[1].data.links[linkKey])
-    })
-
-    links.sort((a, b) => a.position - b.position)
+    const responses = await Promise.all([storyQuery])
 
     return {
         props: {
             story: responses[0].data ? responses[0].data.story : null,
-            links,
             key: slug,
             preview,
         },
@@ -81,9 +75,9 @@ export async function getStaticProps({query, params, preview = false}) {
 export async function getStaticPaths() {
     const storyblokApi = getStoryblokApi()
     // get all links from Storyblok
-    let {data} = await storyblokApi.get("cdn/links/");
+    const { data } = await storyblokApi.get("cdn/links/");
 
-    let paths = [];
+    let paths: { params: { slug: string[] }}[] = [];
     // create a routes for every link
     Object.keys(data.links).forEach((linkKey) => {
         // do not create a route for folders and home

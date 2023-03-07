@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Logo = () => (
   <svg className="m-auto" width="103" height="103" viewBox="0 0 103 103" xmlns="http://www.w3.org/2000/svg">
     <g fill="#09B3AF" fillRule="nonzero">
