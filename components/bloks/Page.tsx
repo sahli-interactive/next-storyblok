@@ -1,17 +1,14 @@
-import { FC } from 'react';
-import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
-import { PageStoryblok } from '../../types/component-types-sb';
+import { storyblokEditable, StoryblokComponent } from '@storyblok/react'
+import { PageStoryblok } from '../../types/component-types-sb'
 
-interface PageProps {
+type PageProps = {
   blok: PageStoryblok
 }
 
-export const Page: FC<PageProps> = ({ blok }) => (
+const Page = ({ blok }: PageProps) => (
   <main className="p-6" {...storyblokEditable(blok)}>
-    {blok.body ?
-      blok.body.map(blok => (
-        <StoryblokComponent blok={blok} key={blok._uid} />
-      )) :
-      null}
+    {blok.body ? blok.body.map(blok => <StoryblokComponent blok={blok} key={blok._uid} />) : null}
   </main>
 )
+
+export default Page

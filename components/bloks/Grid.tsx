@@ -1,12 +1,11 @@
-import { FC } from 'react';
-import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
-import { GridStoryblok } from '../../types/component-types-sb';
+import { storyblokEditable, StoryblokComponent } from '@storyblok/react'
+import { GridStoryblok } from '../../types/component-types-sb'
 
-interface GridProps {
+type GridProps = {
   blok: GridStoryblok
 }
 
-export const Grid: FC<GridProps> = ({blok}) => {
+const Grid = ({ blok }: GridProps) => {
   return (
     <ul className="flex py-8" {...storyblokEditable(blok)}>
       {blok.columns?.map(blok => (
@@ -17,3 +16,5 @@ export const Grid: FC<GridProps> = ({blok}) => {
     </ul>
   )
 }
+
+export default Grid

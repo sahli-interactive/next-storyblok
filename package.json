@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@storyblok/react": "^2.0.14",
-    "axios": "^0.21.1",
     "next": "^12.1.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

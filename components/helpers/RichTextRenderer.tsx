@@ -1,12 +1,11 @@
-import { FC } from 'react'
 import { render } from 'storyblok-rich-text-react-renderer-ts'
 import { StoryblokComponent } from '@storyblok/react'
 
-interface RichTextRendererProps {
+type RichTextRendererProps = {
   text: any
 }
 
-export const RichTextRenderer: FC<RichTextRendererProps> = ({ text }) => {
+const RichTextRenderer = ({ text }: RichTextRendererProps) => {
   return (
     <>
       {render(text, {
@@ -17,3 +16,4 @@ export const RichTextRenderer: FC<RichTextRendererProps> = ({ text }) => {
     </>
   )
 }
+export default RichTextRenderer
