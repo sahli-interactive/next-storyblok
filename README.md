@@ -68,6 +68,19 @@ To revalidate pages after publishing in Storyblok, you have to setup the followi
 
 Don't forger to add the secret-token/password in Netlify as well.
 
+### 7. Update Storyblok TypeScript types
+
+First, make sure you have the [Storyblok CLI](https://github.com/storyblok/storyblok-cli) installed and set up with your account. Second, replace `[SPACE_ID]` in your `package.json` with your space ID e.g. 123456.
+
+Whenever your component definitions have changes, you can update your types:
+
+```sh
+# get current component definition
+$ yarn pull components
+# generate types from component definition
+$ yarn generate-sb-types
+```
+
 ## Resources
 
 - [Next.js docs](https://nextjs.org/docs/#setup)

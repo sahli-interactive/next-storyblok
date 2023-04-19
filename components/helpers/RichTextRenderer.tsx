@@ -16,4 +16,5 @@ const RichTextRenderer = ({ text }: RichTextRendererProps) => {
     </>
   )
 }
+
 export default RichTextRenderer

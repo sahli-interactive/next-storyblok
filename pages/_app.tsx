@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import { storyblokInit, apiPlugin } from '@storyblok/react'
 import feature from '../components/bloks/Feature'
 import teaser from '../components/bloks/Teaser'
