@@ -1,10 +1,10 @@
 import '../styles/globals.scss'
 import { storyblokInit, apiPlugin } from '@storyblok/react'
-import { ComponentType, FC } from 'react'
 import feature from '../components/bloks/Feature'
 import teaser from '../components/bloks/Teaser'
 import page from '../components/bloks/Page'
 import grid from '../components/bloks/Grid'
+import { ComponentType } from 'react'
 
 storyblokInit({
   accessToken: process.env.STORYBLOK_TOKEN,
@@ -18,12 +18,12 @@ storyblokInit({
   },
 })
 
-interface AppProps {
+type AppProps = {
   Component: ComponentType
   pageProps: any
 }
 
-const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} />
 }
 
