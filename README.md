@@ -31,7 +31,7 @@ $ mv .env.example .env.local
 Add the token from Storyblok and a password/any string for the preview-mode (and the webhook):
 ```
 STORYBLOK_TOKEN=<your-new-token>
-PREVIEW_TOKEN=<your-token-or-password>
+SECRET=<your-token-or-password>
 ```
 
 ### 4. Run your project
@@ -50,23 +50,23 @@ $ yarn build # or npm run build
 
 ### 5. Setup preview mode
 
-To enable preview mode you have to add two preview URLs in storyblok:
+To enable preview mode you have to add two preview URLs in Storyblok:
 
 **Preview**
-`https://<my-netlify-or-prod-url>/api/preview?secret=<your-preview-paswsword-or-token>&slug=`
+`https://<my-url>/api/preview?secret=<your-preview-password-or-token>&slug=`
 
 **Exit Preview**
-`https://<my-netlify-or-prod-url>/api/exit-preview?slug=`
+`https://<my-url>/api/exit-preview?slug=`
 
-Don't forget to add the preview token as env-variable in netlify as well.
+Don't forget to add the secret as env-variable.
 It might be helpful for the end user to set the preview URL as default.
 
 ### 6. Webhook for revalidation
 
-To revalidate pages after publishing in Storyblok, you have to setup the following Webhook URL:
-`https://<my-netlify-or-prod-url>/api/story-published?secret=<your-preview-paswsword-or-token>`
+To revalidate pages after publishing in Storyblok, you have to set up the following Webhook URL:
+`https://<my-url>/api/story-published?secret=<your-preview-paswsword-or-token>`
 
-Don't forger to add the secret-token/password in Netlify as well.
+Don't forger to add the secret token as env-variable.
 
 ### 7. Update Storyblok TypeScript types
 

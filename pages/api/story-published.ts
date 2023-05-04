@@ -14,10 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const storyblok = new StoryblokClient({ accessToken: process.env.STORYBLOK_TOKEN })
 
     // initial get requests that is used to retrieve the total amount of pages
-    storyblok.get(`cdn/stories/${req.body.story_id}`, { version: 'published' }).then(async res => {
-        let story = res.data.story;
+    storyblok.get(`cdn/stories/${req.body.story_id}`, { version: 'published' }).then(async sbResult => {
+        let story = sbResult.data.story;
         if (story.slug !== 'global')
-            res.data.revalidate(`/${story.full_slug}`)
+            await res.revalidate(`/${story.full_slug}`)
     }).catch(e => {
         console.log(e)
     })
