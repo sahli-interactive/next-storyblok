@@ -50,3 +50,4 @@ test-timings.json
 # Misc
 components.*
 presets.*
+.tool-versions
