@@ -5,6 +5,7 @@ module.exports = {
   },
   env: {
     STORYBLOK_TOKEN: process.env.STORYBLOK_TOKEN,
-    PREVIEW_TOKEN: process.env.PREVIEW_TOKEN
+    SECRET: process.env.SECRET,
+    NEXT_PUBLIC_SECRET: process.env.SECRET
   }
 }

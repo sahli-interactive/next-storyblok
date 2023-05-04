@@ -7,7 +7,7 @@ import {
   ISbStoryData,
 } from '@storyblok/react'
 
-import { Logo } from '../components/layout/Logo'
+import Logo from '../components/layout/Logo'
 import SeoMetaTags from '../components/layout/SeoMetaTags'
 import { PageStoryblok } from '../types/component-types-sb'
 
