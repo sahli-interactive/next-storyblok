@@ -2,11 +2,16 @@ import { ISbStoriesParams, getStoryblokApi } from '@storyblok/react/rsc'
 import StoryblokStory from '@storyblok/react/story'
 import SeoMetaTags from '../../components/layout/SeoMetaTags'
 import Logo from '../../components/layout/Logo'
+import { draftMode } from 'next/headers'
 
 export const revalidate = 3600 // revalidate every hour
 
 async function fetchData(slug: string) {
-  const sbParams: ISbStoriesParams = { version: 'published', resolve_links: 'url' }
+  const preview = process.env.NODE_ENV === 'development' || draftMode().isEnabled
+  const sbParams: ISbStoriesParams = {
+    version: preview ? 'draft' : 'published',
+    resolve_links: 'url',
+  }
 
   const storyblokApi = getStoryblokApi()
 

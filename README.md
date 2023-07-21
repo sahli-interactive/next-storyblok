@@ -53,7 +53,7 @@ $ yarn build # or npm run build
 To enable preview mode you have to add two preview URLs in Storyblok:
 
 **Preview**
-`https://<my-url>/api/preview?secret=<your-preview-password-or-token>&slug=`
+`https://<my-url>/api/draft?secret=<your-preview-password-or-token>&slug=`
 
 **Exit Preview**
 `https://<my-url>/api/exit-preview?slug=`
