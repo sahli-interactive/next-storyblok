@@ -1,14 +1,14 @@
-import '../styles/globals.scss'
-import { storyblokInit, apiPlugin } from '@storyblok/react'
+'use client'
+import { storyblokInit, apiPlugin } from '@storyblok/react/rsc'
+import { ReactElement } from 'react'
+
 import feature from '../components/bloks/Feature'
 import teaser from '../components/bloks/Teaser'
 import page from '../components/bloks/Page'
 import grid from '../components/bloks/Grid'
-import { ComponentType } from 'react'
 
 storyblokInit({
   accessToken: process.env.STORYBLOK_TOKEN,
-  // bridge: true,
   use: [apiPlugin],
   components: {
     page,
@@ -18,13 +18,10 @@ storyblokInit({
   },
 })
 
-type AppProps = {
-  Component: ComponentType
-  pageProps: any
+type StoryblokProviderProps = {
+  children: ReactElement
 }
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
+export default function StoryblokProvider({ children }: StoryblokProviderProps) {
+  return children
 }
-
-export default MyApp

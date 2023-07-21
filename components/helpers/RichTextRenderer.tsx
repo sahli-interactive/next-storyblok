@@ -1,5 +1,5 @@
 import { render } from 'storyblok-rich-text-react-renderer-ts'
-import { StoryblokComponent } from '@storyblok/react'
+import { StoryblokComponent } from '@storyblok/react/rsc'
 
 type RichTextRendererProps = {
   text: any

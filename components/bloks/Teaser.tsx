@@ -1,4 +1,4 @@
-import { storyblokEditable } from '@storyblok/react'
+import { storyblokEditable } from '@storyblok/react/rsc'
 import Image from 'next/image'
 import { TeaserStoryblok } from '../../types/component-types-sb'
 
