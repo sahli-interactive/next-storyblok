@@ -8,7 +8,7 @@ To use this project you have to have a Storyblok account. If you don't have one 
 
 ## How to get started?
 
-Read the [Next.js tutorial](https://www.storyblok.com/tp/add-a-headless-cms-to-next-js-in-5-minutes) about connecting Storyblok and Next.js
+Read the [Next.js 13 tutorial](https://www.storyblok.com/tp/add-a-headless-cms-to-next-js-13-in-5-minutes) about connecting Storyblok and Next.js
 
 ### 1. Clone the repo
 
@@ -56,7 +56,7 @@ To enable preview mode you have to add two preview URLs in Storyblok:
 `https://<my-url>/api/draft?secret=<your-preview-password-or-token>&slug=`
 
 **Exit Preview**
-`https://<my-url>/api/exit-preview?slug=`
+`https://<my-url>/api/exit-draft?slug=`
 
 Don't forget to add the secret as env-variable.
 It might be helpful for the end user to set the preview URL as default.
