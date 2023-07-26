@@ -76,7 +76,7 @@ Whenever your component definitions have changes, you can update your types:
 
 ```sh
 # get current component definition
-$ yarn pull components
+$ yarn pull-components
 # generate types from component definition
 $ yarn generate-sb-types
 ```

@@ -1,8 +1,8 @@
 import { ISbStoriesParams, getStoryblokApi } from '@storyblok/react/rsc'
 import StoryblokStory from '@storyblok/react/story'
-import SeoMetaTags from '../../components/layout/SeoMetaTags'
 import Logo from '../../components/layout/Logo'
 import { draftMode } from 'next/headers'
+import { Metadata } from 'next'
 
 export const revalidate = 3600 // revalidate every hour
 
@@ -42,6 +42,32 @@ export async function generateStaticParams() {
   return paths
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = params?.slug ? params.slug.join('/') : 'home'
+  const { data } = await fetchData(slug)
+  const story = data.story
+  const title = story.content?.seo?.title ?? story.name
+  const description = story.content?.seo?.description ?? ''
+  return {
+    title: `${title} · Your Brand`,
+    description: description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title: title,
+      description: description,
+      url: `https://your-brand.ch/${story.slug}`,
+    },
+    twitter: {
+      card: 'summary',
+      title: title,
+      description: description,
+    },
+  }
+}
+
 type Props = {
   params: { slug: string[] }
 }
@@ -50,18 +76,16 @@ export default async function Home({ params }: Props) {
   const slug = params?.slug ? params.slug.join('/') : 'home'
   const { data } = await fetchData(slug)
   return (
-    <div>
-      <SeoMetaTags story={data.story} />
-
-      <header className="container w-full mx-auto p-4">
+    <>
+      <nav className="container w-full mx-auto p-4">
         <div className="flex justify-center">
           <Logo />
         </div>
-      </header>
+      </nav>
 
       <StoryblokStory story={data.story} />
 
       <footer className="p-4">Your Footer</footer>
-    </div>
+    </>
   )
 }

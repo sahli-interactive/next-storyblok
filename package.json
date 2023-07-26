@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "create-component": "node ./generators/copy.js",
-    "pull-components": "pull-components --space=[SPACE_ID]",
+    "pull-components": "storyblok pull-components --space=[SPACE_ID]",
     "generate-sb-types": "storyblok-generate-ts source=./components.[SPACE_ID].json target=./types/component-types-sb"
   },
   "dependencies": {
