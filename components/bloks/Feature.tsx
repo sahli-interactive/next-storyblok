@@ -1,4 +1,4 @@
-import { storyblokEditable } from '@storyblok/react'
+import { storyblokEditable } from '@storyblok/react/rsc'
 import { FeatureStoryblok } from '../../types/component-types-sb'
 
 type FeatureProps = {

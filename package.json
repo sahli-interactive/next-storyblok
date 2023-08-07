@@ -8,12 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "create-component": "node ./generators/copy.js",
-    "pull-components": "pull-components --space=[SPACE_ID]",
+    "pull-components": "storyblok pull-components --space=[SPACE_ID]",
     "generate-sb-types": "storyblok-generate-ts source=./components.[SPACE_ID].json target=./types/component-types-sb"
   },
   "dependencies": {
-    "@storyblok/react": "^2.0.18",
-    "next": "^13.3.4",
+    "@storyblok/react": "^2.2.0",
+    "next": "^13.4.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storyblok-rich-text-react-renderer-ts": "^3.2.0"
@@ -23,7 +23,7 @@
     "@types/react": "^18.2.3",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.39.0",
-    "eslint-config-next": "^13.3.4",
+    "eslint-config-next": "^13.4.11",
     "postcss": "^8.4.23",
     "sass": "^1.62.1",
     "storyblok-generate-ts": "^1.13.2",
