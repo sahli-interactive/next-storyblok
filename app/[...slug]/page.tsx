@@ -46,8 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params?.slug ? params.slug.join('/') : 'home'
   const { data } = await fetchData(slug)
   const story = data.story
-  const title = story.content?.seo?.title ?? story.name
-  const description = story.content?.seo?.description ?? ''
+  const title = story.content?.seo?.title || story.name
+  const description = story.content?.seo?.description
   return {
     title: `${title} · Your Brand`,
     description: description,
