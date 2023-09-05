@@ -1,6 +1,6 @@
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { getStoryblokApi } from '@storyblok/react'
+import { getStoryblokApi } from '@storyblok/react/rsc'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
