@@ -1,13 +1,12 @@
-import { ISbStoriesParams, getStoryblokApi } from '@storyblok/react/rsc'
-import StoryblokStory from '@storyblok/react/story'
+import { ISbStoriesParams, getStoryblokApi, StoryblokStory } from '@storyblok/react/rsc'
 import Logo from '../../components/layout/Logo'
 import { draftMode } from 'next/headers'
 import { Metadata } from 'next'
 
-export const revalidate = 3600 // revalidate every hour
+const preview = process.env.NODE_ENV === 'development' || draftMode().isEnabled
+export const revalidate = preview ? 0 : 3600
 
 async function fetchData(slug: string) {
-  const preview = process.env.NODE_ENV === 'development' || draftMode().isEnabled
   const sbParams: ISbStoriesParams = {
     version: preview ? 'draft' : 'published',
     resolve_links: 'url',
@@ -49,6 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = story.content?.seo?.title || story.name
   const description = story.content?.seo?.description
   return {
+    metadataBase: new URL('https://your-brand.ch'),
     title: `${title} · Your Brand`,
     description: description,
     robots: {
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: title,
       description: description,
-      url: `https://your-brand.ch/${story.slug}`,
+      url: `/${story.slug}`,
     },
     twitter: {
       card: 'summary',

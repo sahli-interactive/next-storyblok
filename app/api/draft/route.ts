@@ -1,6 +1,6 @@
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { getStoryblokApi } from '@storyblok/react/rsc'
+import StoryblokClient from 'storyblok-js-client'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -14,7 +14,8 @@ export async function GET(request: Request) {
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
-  const { data } = await getStoryblokApi().get(`cdn/stories/${slug}`, {
+  const storyblok = new StoryblokClient({ accessToken: process.env.STORYBLOK_TOKEN })
+  const { data } = await storyblok.get(`cdn/stories/${slug}`, {
     version: 'draft',
     excluding_fields: 'header,body,seo',
   })
@@ -29,5 +30,5 @@ export async function GET(request: Request) {
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect(data.story.full_slug)
+  redirect(`/${data.story.full_slug}`)
 }
