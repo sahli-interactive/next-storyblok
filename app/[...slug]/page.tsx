@@ -3,13 +3,15 @@ import Logo from '../../components/layout/Logo'
 import { draftMode } from 'next/headers'
 import { Metadata } from 'next'
 
-const preview = process.env.NODE_ENV === 'development' || draftMode().isEnabled
-export const revalidate = preview ? 0 : 3600
+const isDev = process.env.NODE_ENV === 'development'
+export const revalidate = isDev ? 0 : 3600
 
 async function fetchData(slug: string) {
+  const { isEnabled: isDraft } = draftMode()
   const sbParams: ISbStoriesParams = {
-    version: preview ? 'draft' : 'published',
     resolve_links: 'url',
+    version: isDev || isDraft ? 'draft' : 'published',
+    cv: isDev || isDraft ? Date.now() : undefined,
   }
 
   const storyblokApi = getStoryblokApi()
