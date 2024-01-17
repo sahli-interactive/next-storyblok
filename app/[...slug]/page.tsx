@@ -22,7 +22,9 @@ async function fetchData(slug: string) {
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
   const storyblokApi = getStoryblokApi()
-  const { data } = await storyblokApi.get('cdn/links/')
+  const { data } = await storyblokApi.get('cdn/links/', {
+    version: 'published',
+  })
 
   const paths: { slug: string[] }[] = []
   // create a route for every link
