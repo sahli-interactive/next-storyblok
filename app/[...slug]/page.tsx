@@ -2,6 +2,7 @@ import { ISbStoriesParams, getStoryblokApi, StoryblokStory } from '@storyblok/re
 import Logo from '../../components/layout/Logo'
 import { draftMode } from 'next/headers'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 const isDev = process.env.NODE_ENV === 'development'
 export const revalidate = isDev ? 0 : 3600
@@ -15,8 +16,9 @@ async function fetchData(slug: string) {
   }
 
   const storyblokApi = getStoryblokApi()
+  const { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams)
 
-  return storyblokApi.get(`cdn/stories/${slug}`, sbParams)
+  return { story: data.story }
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
@@ -47,8 +49,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params?.slug ? params.slug.join('/') : 'home'
-  const { data } = await fetchData(slug)
-  const story = data.story
+  const { story } = await fetchData(slug)
+
+  if (!story) {
+    return {}
+  }
+  
   const title = story.content?.seo?.title || story.name
   const description = story.content?.seo?.description
   return {
@@ -78,7 +84,12 @@ type Props = {
 
 export default async function Home({ params }: Props) {
   const slug = params?.slug ? params.slug.join('/') : 'home'
-  const { data } = await fetchData(slug)
+  const { story } = await fetchData(slug)
+
+  if (!story) {
+    return notFound()
+  }
+
   return (
     <>
       <nav className="container w-full mx-auto p-4">
@@ -87,7 +98,7 @@ export default async function Home({ params }: Props) {
         </div>
       </nav>
 
-      <StoryblokStory story={data.story} />
+      <StoryblokStory story={story} />
 
       <footer className="p-4">Your Footer</footer>
     </>
