@@ -32,7 +32,11 @@ export async function generateStaticParams() {
   // create a route for every link
   Object.keys(data.links).forEach(linkKey => {
     // do not create a route for folders and home
-    if (data.links[linkKey].is_folder || data.links[linkKey].slug === 'home') {
+    if (
+      data.links[linkKey].is_folder ||
+      data.links[linkKey].slug === 'home' ||
+      data.links[linkKey].slug === 'global'
+    ) {
       return
     }
 
@@ -54,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!story) {
     return {}
   }
-  
+
   const title = story.content?.seo?.title || story.name
   const description = story.content?.seo?.description
   return {
