@@ -9,7 +9,8 @@
     "lint": "next lint",
     "create-component": "node ./generators/copy.js",
     "pull-components": "storyblok pull-components --space=[SPACE_ID]",
-    "generate-sb-types": "storyblok-generate-ts source=./components.[SPACE_ID].json target=./types/component-types-sb"
+    "generate-sb-types": "storyblok-generate-ts source=./components.[SPACE_ID].json target=./types/component-types-sb",
+    "generate-components": "node generators/cli.js components.[SPACE_ID].json"
   },
   "dependencies": {
     "@storyblok/react": "^2.4.7",
@@ -28,7 +29,8 @@
     "sass": "^1.62.1",
     "storyblok-generate-ts": "^1.13.2",
     "tailwindcss": "^3.3.2",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@sahli-interactive/sb-react-component-generator": "^1.0.0"
   },
   "engines": {
     "node": ">=8.0.0"
