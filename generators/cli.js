@@ -61,7 +61,7 @@ schema.components.forEach((componentSchema) => {
     
     export default ${componentName};
   `;
-  fs.writeFileSync(path.resolve(__dirname, filePath), component);
+  fs.writeFileSync(path.resolve('./', filePath), component);
   console.log(`File ${componentName}.tsx created at ${filePath}`);
 
 
