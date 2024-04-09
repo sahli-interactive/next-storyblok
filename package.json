@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "create-component": "node ./generators/copy.js",
-    "pull-components": "storyblok pull-components --space=[SPACE_ID]",
-    "generate-sb-types": "storyblok-generate-ts source=./components.[SPACE_ID].json target=./types/component-types-sb",
-    "generate-components": "node generators/cli.js ../components.202685.json"
+    "pull-components": "storyblok pull-components --space=SPACE_ID",
+    "generate-sb-types": "storyblok-generate-ts source=./components.SPACE_ID.json target=./types/component-types-sb",
+    "generate-components": "node generators/cli.js ../components.SPACE_ID.json"
   },
   "dependencies": {
     "@storyblok/react": "^2.4.7",

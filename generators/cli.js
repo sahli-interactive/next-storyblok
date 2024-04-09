@@ -14,7 +14,7 @@ const generateContent = (schema) => {
   return result.map(blok => {
     switch (blok.type) {
       case 'text':
-        return `<p> {blok.`+blok.name+`}</p>`
+        return `<p>{blok.` + blok.name + `}</p>`
       case 'bloks':
         return `{blok.`+blok.name+` && blok.` +blok.name+ `.map(nestedBlok => <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />)}`
       default:
@@ -52,11 +52,11 @@ schema.components.forEach((componentSchema) => {
     }
     
     const ${componentName} = ({ blok }: ${className}) => (
-      <div className="py-2 bg-gray-100" {...storyblokEditable(blok)}>
+      <section {...storyblokEditable(blok)}>
         <div>
           ` + generateContent(componentSchema).join('\n') +`
         </div>
-      </div>
+      </section>
     )
     
     export default ${componentName};

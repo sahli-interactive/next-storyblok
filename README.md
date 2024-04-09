@@ -10,23 +10,21 @@ To use this project you have to have a Storyblok account. If you don't have one 
 
 Read the [Next.js 13 tutorial](https://www.storyblok.com/tp/add-a-headless-cms-to-next-js-13-in-5-minutes) about connecting Storyblok and Next.js
 
-### 1. Clone the repo
+### 1. Use this template
 
-```sh
-  $ git clone https://github.com/sahli-interactive/next-storyblok.git
-```
+Create a new repository from this template by clicking the **Use this template** button.
 
 ### 2. Install all dependencies
 
 ```sh
-$  yarn # or npm install
+yarn # or npm install
 ```
 
 ### 3. Adding the Access token
 
-Create a new empty space and copy the Preview Token.  Create your ```.env.local``` from  ```.env.example```:
+Create a new empty space and copy the Preview Token. Create your `.env.local` from  `.env.example`:
 ```sh
-$ mv .env.example .env.local
+mv .env.example .env.local
 ```
 Add the token from Storyblok and a password/any string for the preview-mode (and the webhook):
 ```
@@ -40,15 +38,36 @@ Set the preview domain in <strong>Storyblok</strong> to `http://localhost:3000/`
 
 ```sh
 # to run in developer mode
-$ yarn dev # or npm run dev
+yarn dev # or npm run dev
 ```
 
 ```sh
 # to build your project
-$ yarn build # or npm run build
+yarn build # or npm run build
 ```
 
-### 5. Setup preview mode
+### 5. Generate boilerplate components and TypeScript types
+
+First, make sure you have the [Storyblok CLI](https://github.com/storyblok/storyblok-cli) installed and set up with your account. Next, replace `SPACE_ID` in `package.json` with your space ID e.g. `123456`.
+
+```sh
+# get current component definition
+yarn pull-components
+```
+
+```sh
+# generate boilerplate components
+yarn generate-components
+```
+
+Whenever your component definitions have changes, you can update your types:
+
+```sh
+# generate types from component definition
+yarn generate-sb-types
+```
+
+### 6. Setup preview mode
 
 To enable preview mode you have to add two preview URLs in Storyblok:
 
@@ -61,25 +80,12 @@ To enable preview mode you have to add two preview URLs in Storyblok:
 Don't forget to add the secret as env-variable.
 It might be helpful for the end user to set the preview URL as default.
 
-### 6. Webhook for revalidation
+### 7. Webhook for revalidation
 
 To revalidate pages after publishing in Storyblok, you have to set up the following Webhook URL:
-`https://<my-url>/api/story-published?secret=<your-preview-paswsword-or-token>`
+`https://<my-url>/api/story-published?secret=<your-preview-password-or-token>`
 
 Don't forger to add the secret token as env-variable.
-
-### 7. Update Storyblok TypeScript types
-
-First, make sure you have the [Storyblok CLI](https://github.com/storyblok/storyblok-cli) installed and set up with your account. Second, replace `[SPACE_ID]` in your `package.json` with your space ID e.g. 123456.
-
-Whenever your component definitions have changes, you can update your types:
-
-```sh
-# get current component definition
-$ yarn pull-components
-# generate types from component definition
-$ yarn generate-sb-types
-```
 
 ## Resources
 
