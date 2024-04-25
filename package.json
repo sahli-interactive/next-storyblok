@@ -9,7 +9,7 @@
     "lint": "next lint",
     "create-component": "node ./generators/copy.js",
     "pull-components": "storyblok pull-components --space=SPACE_ID",
-    "generate-sb-types": "storyblok-generate-ts source=./components.SPACE_ID.json target=./types/component-types-sb",
+    "generate-sb-types": "storyblok-generate-ts source=./components.SPACE_ID.json target=./types/component-types-sb compilerOptions.additionalProperties=false",
     "generate-components": "node generators/cli.js ../components.SPACE_ID.json"
   },
   "dependencies": {
@@ -28,7 +28,7 @@
     "eslint-config-next": "^14.1.4",
     "postcss": "^8.4.38",
     "sass": "^1.74.1",
-    "storyblok-generate-ts": "^2.1.0",
+    "storyblok-generate-ts": "ssh:git@github.com:sahli-interactive/storyblok-generate-ts.git#extend-default-custom-parser",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.4"
   },

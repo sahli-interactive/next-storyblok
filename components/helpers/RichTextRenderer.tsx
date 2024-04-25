@@ -1,8 +1,9 @@
 import { render } from 'storyblok-rich-text-react-renderer-ts'
 import { StoryblokComponent } from '@storyblok/react/rsc'
+import { RichtextStoryblok } from '../../types/component-types-sb'
 
 type RichTextRendererProps = {
-  text: any
+  text: RichtextStoryblok
 }
 
 const RichTextRenderer = ({ text }: RichTextRendererProps) => {

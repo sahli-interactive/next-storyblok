@@ -1,13 +1,15 @@
-import { storyblokEditable } from '@storyblok/react/rsc'
+import { SbBlokData, storyblokEditable } from '@storyblok/react/rsc'
 import { FeatureStoryblok } from '../../types/component-types-sb'
+import RichTextRenderer from '../helpers/RichTextRenderer'
 
 type FeatureProps = {
   blok: FeatureStoryblok
 }
 
 const Feature = ({ blok }: FeatureProps) => (
-  <div className="py-2 bg-gray-100" {...storyblokEditable(blok)}>
-    <h1 className="uppercase font-medium text-2xl py-8 text-center">{blok.name}</h1>
+  <div className="p-6 bg-gray-100" {...storyblokEditable(blok as SbBlokData)}>
+    <h2 className="font-medium text-2xl mb-4">{blok.headline}</h2>
+    {blok.text && <RichTextRenderer text={blok.text} />}
   </div>
 )
 

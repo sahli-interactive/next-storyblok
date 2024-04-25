@@ -1,8 +1,11 @@
-import { ISbStoriesParams, getStoryblokApi, StoryblokStory } from '@storyblok/react/rsc'
+import { ISbStoriesParams, getStoryblokApi, StoryblokStory, ISbStoryData } from '@storyblok/react/rsc'
 import Logo from '../../components/layout/Logo'
 import { draftMode } from 'next/headers'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { PageStoryblok } from '../../types/component-types-sb'
+
+export type ContentType = PageStoryblok // add more content types if needed
 
 const isDev = process.env.NODE_ENV === 'development'
 export const revalidate = isDev ? 0 : 3600
@@ -16,9 +19,13 @@ async function fetchData(slug: string) {
   }
 
   const storyblokApi = getStoryblokApi()
-  const { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams)
 
-  return { story: data.story }
+  try {
+    const { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams)
+    return { story: data.story as ISbStoryData<ContentType> }
+  } catch (error) {
+    return { story: null }
+  }
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
